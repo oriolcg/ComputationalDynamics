@@ -5,6 +5,12 @@
 
 # Learning Objectives
 
+At the end of this module you will be able to:
+1. Define a simple solver to approximate solutions of ODEs based on Taylor Series
+2. Quantify the numerical error of an approximated solution
+3. Define adaptive time stepping approaches to control the numerical error
+4. Distinguish between different ODE solvers
+
 # Introduction
 
 Let's assume that we want to find an analytical expression of a function that describes the displacement an object in time, denoted as $ u(t) $. For simplicity, we assume that this object only has one degree of freedom (DOF), *e.g.* the vertical displacement of the centre of gravity of a floating vessel. We also assume that the object satisfies the equation of motion given by a linear mass-damping-stiffness system:
