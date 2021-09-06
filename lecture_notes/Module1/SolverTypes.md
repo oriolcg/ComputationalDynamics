@@ -35,11 +35,27 @@ $$ \mathbf{q}_i = f_{\text{\tiny BE}}(\Delta t,\dot{\mathbf{q}_i},\mathbf{q}_{i-
 
 We say that an ODE solver is a **single-step** solver when the function that gives the state vector at time $t_i$ only depends on the state vector and its derivatives at $t_i$ or $t_{i-1}$. That is
 $$ \mathbf{q}_i = f_{\text{\tiny 1-step}}(\Delta t,\mathbf{q}_{i},\mathbf{q}_{i-1},\dot{\mathbf{q}}_{i},\dot{\mathbf{q}}_{i-1},...).$$
+@@row
+@@img
+@@center ![](/assets/lecture_notes/Module1/SolverTypes/figures/SingleStep.png) @@
+@@
+~~~
+<div style="clear: both"></div>
+~~~
+@@
 
 Note that the Forward Euler and Backward Euler methods are single-step methods.
 
 We say that an ODE solver is a **multi-step** solver when the function that gives the state vector at time $t_i$ depends on the state vector and its derivatives at multiple previous times. That is
 $$ \mathbf{q}_i = f_{\text{\tiny n-step}}(\Delta t,\mathbf{q}_{i},\mathbf{q}_{i-1},\dot{\mathbf{q}}_{i},\dot{\mathbf{q}}_{i-1},...,\mathbf{q}_{j},\dot{\mathbf{q}}_{j},...,\mathbf{q}_{j-1},\dot{\mathbf{q}}_{j-1},...)\qquad \text{for }j < i-1.$$
+@@row
+@@img
+@@center ![](/assets/lecture_notes/Module1/SolverTypes/figures/MultiStep.png) @@
+@@
+~~~
+<div style="clear: both"></div>
+~~~
+@@
 
 An example of multi-step scheme are the [**Backward Differentiation Formulas**](https://en.wikipedia.org/wiki/Backward_differentiation_formula). For instance, the second-order Backward Differentiation Formula (BDF2) reads:
 $$ \mathbf{q}_i =f_{\text{\tiny BDF2}}(\Delta t,\dot{\mathbf{q}}_{i},\mathbf{q}_{i-1},\mathbf{q}_{i-2}) = \frac{4}{3}\mathbf{q}_{i-1}-\frac{1}{3}\mathbf{q}_{i-2} + \frac{2}{3}\Delta t\dot{\mathbf{q}}_{i}.$$
@@ -49,6 +65,14 @@ $$ \mathbf{q}_i =f_{\text{\tiny BDF2}}(\Delta t,\dot{\mathbf{q}}_{i},\mathbf{q}_
 We say that an ODE solver is a **single-stage** solver when the function that gives the state vector at time $t_i$ depends on the state vector and its derivatives at previous steps, but it does not use any additional intermediate stages. 
 
 The Forward Euler, Backward Euler and BDF schemes are single-stage solvers.
+@@row
+@@img
+@@center ![](/assets/lecture_notes/Module1/SolverTypes/figures/FE.png) @@
+@@
+~~~
+<div style="clear: both"></div>
+~~~
+@@
 
 We say that an ODE solver is a **multi-stage** solver when the function that gives the state vector at time $t_i$ only depends on the state vector and its derivatives at $t_i$ or $t_{i-1}$, but it uses additional intermediate stages. 
 
@@ -59,6 +83,14 @@ k_2=&f\left(\frac{\Delta t}{2},\mathbf{q}_{i-1}+\Delta t\frac{k_1}{2}\right),\\
 k_3=&f\left(\frac{\Delta t}{2},\mathbf{q}_{i-1}+\Delta t\frac{k_2}{2}\right),\\
 k_4=&f\left(\Delta t,\mathbf{q}_{i-1}+\Delta tk_3\right).
 \end{align*} $$
+@@row
+@@img
+@@center ![](/assets/lecture_notes/Module1/SolverTypes/figures/RK.png) @@
+@@
+~~~
+<div style="clear: both"></div>
+~~~
+@@
 
 &nbsp;
 &nbsp;
