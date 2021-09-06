@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="/libs/katex/katex.min.css">
+   
+   <link rel="stylesheet" href="/libs/highlight/github.min.css">
+   
+
+  <link href="/css/franklin.css" rel="stylesheet">
+<link href="/css/vela.css" rel="stylesheet">
+<script src="/libs/vela/jquery.min.js"></script>
+
+<link rel="icon" href="/assets/favicon.png">
+
+
+  <title>Franklin Example | Vela</title>
+</head>
+<body>
+<div class="main-nav slideout-menu slideout-menu-left" id="menu">
+  <div class="flex-container">
+    <span class="sidebar-brand">
+      <h3 style='font-size: 25px'>Vela Template</h3>
+    </span>
+  </div> <!-- class="flex-container" -->
+
+  <nav class="sidebar-nav">
+    <ul class="metismenu"  id="metismenu" >
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="" class="has-arrow">Lecture notes</a>
+        <ul>
+          <li><a href="/lecture_notes/Module1/Introduction" class="has-arrow">Module 1. Introduction to Computational Methods for ODEs</a></li>
+          <ul>
+            <li><a href="/lecture_notes/Module1/TaylorSeries">1.1 Taylor Series</a></li>
+            <li><a href="/lecture_notes/Module1/ApproxODES">1.2 Approximating ODEs with Taylor Series</a></li>
+            <li><a href="/lecture_notes/Module1/TruncationErrors">1.3 Truncation Errors</a></li>
+            <li><a href="/lecture_notes/Module1/ODESolver">1.4 An ODE solver</a></li>
+            <li><a href="/lecture_notes/Module1/TimeStepping">1.5 Time stepping and error control</a></li>
+            <li><a href="/lecture_notes/Module1/SolverTypes">1.6 Types of solvers</a></li>
+          </ul>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</div> <!-- main nav menu -->
+
+<main id="panel" class="slidout-panel slideout-panel-left">
+  <div class="toggle-button hamburger hamburger--spin">
+    <div class="hamburger-box">
+      <div class="hamburger-inner"></div>
+    </div>
+  </div>
+  <h1 class="page title">Module 1. Introduction to computational methods for ODEs</h1>
+  <hr>
+
+
+
+<!-- Content appended here -->
+<div class="franklin-content"><h1 id="learning_objectives"><a href="#learning_objectives" class="header-anchor">Learning Objectives</a></h1>
+<h1 id="introduction"><a href="#introduction" class="header-anchor">Introduction</a></h1>
+<p>Let&#39;s assume that we want to find an analytical expression of a function that describes the displacement an object in time, denoted as \( u(t) \). For simplicity, we assume that this object only has one degree of freedom &#40;DOF&#41;, <em>e.g.</em> the vertical displacement of the centre of gravity of a floating vessel. We also assume that the object satisfies the equation of motion given by a linear mass-damping-stiffness system:</p>
+\[ m\ddot{u}(t)+c\dot{u}(t)+ku(t)=F(t), \]
+<p>with \(m\) the mass of the object, \(c\) the damping and \(k\) the stiffness. \( F(t) \) is a time-dependent forcing term. We also provide appropriate initial conditions, in that case </p>
+\[ u(0)=0,\quad\dot{u}(0)=\dot{u}_0. \]
+<p>In General, and mostly depending on the complexity of the forcing term \( F(t) \), it is difficult to find an analytical expression that is defined at all times, \(u(t)\, ∀ t\in[0,\infty)\), see red curve in the following figure.</p>
+<div class="row"><div class="img-small"><div class="left"><img src="/assets/lecture_notes/Module1/Introduction/figures/1_1.png" alt="" /></div></div>
+
+<div style="clear: both"></div></div>
+<p>Instead, we might be interested in knowing the value of the function at specific points in time, \(u(t_0),u(t_1),u(t_2),...,u(t_N)\), see green dots in the previous figure. From these set of values, one can reconstruct an approximated function \(\tilde{u}_N(t)\) by, for instance, using a linear interpolation between points &#40;blue dashed line in the figure&#41;.</p>
+<p>For smooth enough functions, \(u(t)\), as we increase the number of evaluation points in time, \(N\), the approximated solution solution \(\tilde{u}_N(t)\) will be closer to \(u(t)\).</p>
+<div class="important">In this course we will learn how to find approximate solutions like \(\tilde{u}_N(t)\) by using numerical methods.</div>
+<h2 id="notation"><a href="#notation" class="header-anchor">Notation</a></h2>
+<p>In these notes we will use the following notation: </p>
+<ul>
+<li><p>\(u_i:=u(t_i)\), the function evaluated at time \(t_i\). </p>
+</li>
+<li><p>\(\Delta t_i:=t_i-t_{i-1}\), the time step between two consecutive time steps, \(t_{i-1}\) and \(t_i\).</p>
+</li>
+</ul>
+<p>When considering constant time steps, in an interval of time \(t\in[0,T]\) with \(N\) time steps, the time step size will be \(\Delta t=T/N\).</p>
+<div class="page-foot">
+  <div class="copyright">
+    &copy; Oriol Colomés. Last modified: September 02, 2021. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
+  </div>
+</div>
+</div><!-- CONTENT ENDS HERE -->
+  </main> <!-- end of id=main -->
+  <script src="/libs/vela/metisMenu.min.js"></script>
+  <script src="/libs/vela/slideout.min.js"></script>
+  
+    <script src="/libs/katex/katex.min.js"></script>
+<script src="/libs/katex/auto-render.min.js"></script>
+<script>renderMathInElement(document.body)</script>
+
+  
+  
+    <script src="/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
+
+  
+</body>
+</html>

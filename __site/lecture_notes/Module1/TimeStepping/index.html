@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="/libs/katex/katex.min.css">
+   
+   <link rel="stylesheet" href="/libs/highlight/github.min.css">
+   
+
+  <link href="/css/franklin.css" rel="stylesheet">
+<link href="/css/vela.css" rel="stylesheet">
+<script src="/libs/vela/jquery.min.js"></script>
+
+<link rel="icon" href="/assets/favicon.png">
+
+
+  <title>Franklin Example | Vela</title>
+</head>
+<body>
+<div class="main-nav slideout-menu slideout-menu-left" id="menu">
+  <div class="flex-container">
+    <span class="sidebar-brand">
+      <h3 style='font-size: 25px'>Vela Template</h3>
+    </span>
+  </div> <!-- class="flex-container" -->
+
+  <nav class="sidebar-nav">
+    <ul class="metismenu"  id="metismenu" >
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="" class="has-arrow">Lecture notes</a>
+        <ul>
+          <li><a href="/lecture_notes/Module1/Introduction" class="has-arrow">Module 1. Introduction to Computational Methods for ODEs</a></li>
+          <ul>
+            <li><a href="/lecture_notes/Module1/TaylorSeries">1.1 Taylor Series</a></li>
+            <li><a href="/lecture_notes/Module1/ApproxODES">1.2 Approximating ODEs with Taylor Series</a></li>
+            <li><a href="/lecture_notes/Module1/TruncationErrors">1.3 Truncation Errors</a></li>
+            <li><a href="/lecture_notes/Module1/ODESolver">1.4 An ODE solver</a></li>
+            <li><a href="/lecture_notes/Module1/TimeStepping">1.5 Time stepping and error control</a></li>
+            <li><a href="/lecture_notes/Module1/SolverTypes">1.6 Types of solvers</a></li>
+          </ul>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</div> <!-- main nav menu -->
+
+<main id="panel" class="slidout-panel slideout-panel-left">
+  <div class="toggle-button hamburger hamburger--spin">
+    <div class="hamburger-box">
+      <div class="hamburger-inner"></div>
+    </div>
+  </div>
+  <h1 class="page title">1.5 Time stepping and error control</h1>
+  <hr>
+
+
+
+<!-- Content appended here -->
+<div class="franklin-content"><p>We have seen that the error of the numerical solution will decrease as we decrease the time step. In particular, we have shown that the global error of the Forward Euler method will decrease linearly with the time step size: \(\epsilon_{\mathbf{q}_N}\sim \mathcal{O}(\Delta t).\)</p>
+<p>Can we control this error such that its value is always below a certain tolerance, \(\tau\)?</p>
+<p>Let&#39;s look into more detail on how the error could be controled. We know that the truncation error of the state vector at time \(i\) is</p>
+\[\epsilon_{\mathbf{q}_i} = \frac{\Delta t^2}{2}\ddot{\mathbf{q}}_i + \mathcal{O}(\Delta t^3)\]
+<p>and we want that \(\epsilon_{\mathbf{q}_i}\leq\tau\) Assuming that the third-order term will vanish faster, we seek for a variable time step size such that</p>
+\[\left|\frac{\Delta t_i^2}{2}\ddot{\mathbf{q}}_i\right|\leq\tau,\]
+<p>which leads to </p>
+<a id="eqdt_var" class="anchor"></a>\[ \Delta t_i\leq\sqrt{2\frac{\tau}{\left|\ddot{\mathbf{q}}_i\right|}}.\]
+<p>Some times is useful to also define a tolerance based on the value of the solution. In that case, we can define the tolerance as</p>
+<a id="eqtol" class="anchor"></a>\[\tau=\max(\tau_{\tiny \text{rel}}|\mathbf{q}_i|,\tau_{\tiny\text{abs}}),\]
+<p>where \(\tau_{\tiny \text{rel}}\) and \(\tau_{\tiny \text{abs}}\) are relative and absolute tolerances. </p>
+<p>Instead of the vector magnitudes, \(\left|\ddot{\mathbf{q}}_i\right|\) and \(\left|\mathbf{q}_i\right|\), one could consider a condition less restrictive based on the component-wise values, \(\ddot{q}_j\) and \(q_j\), <em>i.e</em></p>
+<a id="eqdt_var_component" class="anchor"></a>\[ \Delta t_i\leq\min_j\sqrt{2\frac{\tau}{\left|\ddot{q}_{j,i}\right|}}.\]
+<p>The remaining issue with conditions <span class="eqref">(<a href="#eqdt_var">3</a>)</span> or <span class="eqref">(<b>??</b>)</span> is that we do not have a definition for \(\ddot{\mathbf{q}}_i\). An example of approximation could be:</p>
+<a id="eqddotq" class="anchor"></a>\[\ddot{\mathbf{q}}_i\approx\frac{\dot{\mathbf{q}}_i-\dot{\mathbf{q}}_{i-1}}{\Delta t_{i}}.\]
+<p>However, this introduces a nonlinearity with respect to \(\Delta t_i\) that would have to be addressed with an iterative algorithm. Assuming that the solution is smooth and varies slowly, one could use the previous time step size, \(\Delta t_{i-1}\) in <span class="eqref">(<a href="#eqddotq">6</a>)</span>.</p>
+<div class="page-foot">
+  <div class="copyright">
+    &copy; Oriol Colomés. Last modified: September 02, 2021. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
+  </div>
+</div>
+</div><!-- CONTENT ENDS HERE -->
+  </main> <!-- end of id=main -->
+  <script src="/libs/vela/metisMenu.min.js"></script>
+  <script src="/libs/vela/slideout.min.js"></script>
+  
+    <script src="/libs/katex/katex.min.js"></script>
+<script src="/libs/katex/auto-render.min.js"></script>
+<script>renderMathInElement(document.body)</script>
+
+  
+  
+    <script src="/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
+
+  
+</body>
+</html>

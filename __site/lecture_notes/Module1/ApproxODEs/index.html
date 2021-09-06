@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="/libs/katex/katex.min.css">
+   
+   <link rel="stylesheet" href="/libs/highlight/github.min.css">
+   
+
+  <link href="/css/franklin.css" rel="stylesheet">
+<link href="/css/vela.css" rel="stylesheet">
+<script src="/libs/vela/jquery.min.js"></script>
+
+<link rel="icon" href="/assets/favicon.png">
+
+
+  <title>Franklin Example | Vela</title>
+</head>
+<body>
+<div class="main-nav slideout-menu slideout-menu-left" id="menu">
+  <div class="flex-container">
+    <span class="sidebar-brand">
+      <h3 style='font-size: 25px'>Vela Template</h3>
+    </span>
+  </div> <!-- class="flex-container" -->
+
+  <nav class="sidebar-nav">
+    <ul class="metismenu"  id="metismenu" >
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="" class="has-arrow">Lecture notes</a>
+        <ul>
+          <li><a href="/lecture_notes/Module1/Introduction" class="has-arrow">Module 1. Introduction to Computational Methods for ODEs</a></li>
+          <ul>
+            <li><a href="/lecture_notes/Module1/TaylorSeries">1.1 Taylor Series</a></li>
+            <li><a href="/lecture_notes/Module1/ApproxODES">1.2 Approximating ODEs with Taylor Series</a></li>
+            <li><a href="/lecture_notes/Module1/TruncationErrors">1.3 Truncation Errors</a></li>
+            <li><a href="/lecture_notes/Module1/ODESolver">1.4 An ODE solver</a></li>
+            <li><a href="/lecture_notes/Module1/TimeStepping">1.5 Time stepping and error control</a></li>
+            <li><a href="/lecture_notes/Module1/SolverTypes">1.6 Types of solvers</a></li>
+          </ul>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</div> <!-- main nav menu -->
+
+<main id="panel" class="slidout-panel slideout-panel-left">
+  <div class="toggle-button hamburger hamburger--spin">
+    <div class="hamburger-box">
+      <div class="hamburger-inner"></div>
+    </div>
+  </div>
+  <h1 class="page title">1.2 Approximating ODEs with Taylor Series</h1>
+  <hr>
+
+
+
+<!-- Content appended here -->
+<div class="franklin-content"><p>We have seen that to approximate a function using Taylor series &#40;TS&#41;, we just need the value of the function and its derivatives at a point. We now can use this tool to approximate the solution of ODEs. </p>
+<p>Let&#39;s consider the linear mass-damping-stiffness system defined before:</p>
+\[ m\ddot{u}(t)+c\dot{u}(t)+ku(t)=F(t), \]
+<p>with appropriate initial conditions at \(t=t_0\)</p>
+\[ u(t_0)=u_0,\quad\dot{u}(t_0)=\dot{u}_0. \]
+<p>Here, we want to find the expression of a TS approximation of \(u(t)\) around a point in time \(t^*\). That is</p>
+\[ u(t)\approx\tilde{u}(t)=\sum_{i=0}^r\frac{u^{(i)}(t^*)}{i!}(x-t^*)^i. \]
+<p>Using \(r=2\), this expression simplifies to</p>
+\[ \tilde{u}(t)=u(t^*) + \dot{u}(t^*)(t-t^*) + \frac{1}{2}\ddot{u}(t^*)(t-t^*)^2. \]
+<p>The issue here is that in order to get the expression of \( \tilde{u}(t) \), we first need the values \(u(t^*)\), \(\dot{u}(t^*)\) and \(\ddot{u}(t^*)\) for a given \(t^*\). If we select \(t^*=t_0\), we can use the initial conditions, i.e. \(u(t^*)=u(t_0)=u_0\) and \(\dot{u}(t^*)=\dot{u}(t_0)=\dot{u}_0\). Moreover, from the equation of motion, we can obtain the value for \(\ddot{u}(t^*)=\ddot{u}(t_0)=\frac{1}{m}(F(t_0)-ku_0-c\dot{u}_0)\). Therefore, the appoximated solution \(\tilde{u}_1=\tilde{u}(t_1)\) at time \(t_1=t_0+Δ t\) will read</p>
+\[ \tilde{u}_1=u_0 + \Delta t\dot{u}_0 + \frac{\Delta t^2}{2}\ddot{u}_0. \]
+<p>As seen previously, the quality of the approximation depends on how far \(t_1\) is from \(t_0\), that is how large \(\Delta t\) is. This means that reducing \(\Delta t\) we will get a better approximation of \(u\). Assuming that \(\tilde{u}_1\) is a good enough approximation of \(u(t_1)\) and simplifying notation, hereinafter we will use \(u_1\) instead of \(\tilde{u}_1\). </p>
+<p>Now, we are not just interested in finding \(u(t_1)\) for a \(t_1\) close enough to \(t_0\), but we want to find \(u(t)\) for any \(t\in[t_0,T]\). Let&#39;s see what happens if we apply the same process at \(t_2=t_1 + \Delta t\):</p>
+<a id="u2" class="anchor"></a>\[ \tilde{u}_2=u_1 + \Delta t\dot{u}_1 + \frac{\Delta t^2}{2}\ddot{u}_1. \]
+<p>In this expression we need \(u_1\), which is known, \(\dot{u}_1\), which is unknown, and \(\ddot{u}_1\), that is also unknown. From the equation of motion, we can get the value of \(\ddot{u}_1\) in terms of \(u_1\) and \(\dot{u}_1\)</p>
+<a id="ddotu1" class="anchor"></a>\[\ddot{u}_1=f(u_1,\dot{u}_1)=\frac{1}{m}(F(t_1)-ku_1-c\dot{u}_1).\]
+<p>However, we still have \(\dot{u}_1\) as an unknown in <span class="eqref">(<a href="#u2">6</a>)</span>. Let&#39;s try to approximate it using a TS again with \(r=2\) terms:</p>
+<a id="dotu1" class="anchor"></a>\[\dot{u}_1=\dot{u}_0+\Delta t\ddot{u}_0+\frac{\Delta t^2}{2}\frac{d^3u_0}{dt^3}. \]
+<p>The problem now with equation <span class="eqref">(<a href="#dotu1">8</a>)</span> is that we don&#39;t have the initial value of the third derivative in time \(\frac{d^3u_0}{dt^3}\). Alternatively, we can use an approximation using a TS with \(r=1\), leading to </p>
+<a id="dotu1_" class="anchor"></a>\[\dot{u}_1=\dot{u}_0+\Delta t\ddot{u}_0.\]
+<p>Thus, we can obtain an approximation of \(u_2\) in terms of \(u_1\), \(\dot{u}_1\) and \(\ddot{u}_1\) that are known. This process can be generalized to an arbitrary number of steps. Let&#39;s assume that we discretize the time in \(N\) equally distributed time points, \([t_0,t_1,t_2,...,t_N]\), where \(t_i=i\Delta t\). Knowing the solution and its first time derivative at time \(t_{i-1}\), we can find the solution at \(t_i\) by</p>
+<div class="colbox-blue"><ol>
+<li><p>Get the value of the second time derivative from the equation of motion: </p>
+</li>
+</ol>
+<a id="approx_ddotu" class="anchor"></a>\[\ddot{u}_{i-1}=\frac{1}{m}(F(t_{i-1})-ku_{i-1}-c\dot{u}_{i-1}).\]
+<ol start="2">
+<li><p>Update the solution at \(t_i\): </p>
+</li>
+</ol>
+<a id="approx_u" class="anchor"></a>\[u_i=u_{i-1} + \Delta t\dot{u}_{i-1} + \frac{\Delta t^2}{2}\ddot{u}_{i-1}.\]
+<ol start="3">
+<li><p>Update the first time derivative at \(t_i\): </p>
+</li>
+</ol>
+<a id="approx_dotu" class="anchor"></a>\[\dot{u}_i=\dot{u}_{i-1}+\Delta t\ddot{u}_{i-1}.\]</div>
+<div class="page-foot">
+  <div class="copyright">
+    &copy; Oriol Colomés. Last modified: September 02, 2021. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
+  </div>
+</div>
+</div><!-- CONTENT ENDS HERE -->
+  </main> <!-- end of id=main -->
+  <script src="/libs/vela/metisMenu.min.js"></script>
+  <script src="/libs/vela/slideout.min.js"></script>
+  
+    <script src="/libs/katex/katex.min.js"></script>
+<script src="/libs/katex/auto-render.min.js"></script>
+<script>renderMathInElement(document.body)</script>
+
+  
+  
+    <script src="/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
+
+  
+</body>
+</html>
