@@ -13,7 +13,7 @@ u_i&=u_{i-1} + \Delta t\dot{u}_{i-1},\\
 Remember that the value of $\ddot{u}_{i-1}$ is typically given by the Equation of Motion of the system. 
 
 Equation \eqref{eq:FE} can be re-written in a vector form by defining the so called *state variable* $$\mathbf{q}_i=\left[\begin{align*}&u_i\\&\dot{u}_i\end{align*}\right],$$ leading to a (FE) scheme with truncation error of order $\mathcal{O}(\Delta t^2)$
-$$ \mathbf{q}_i = \Delta t\ \dot{\mathbf{q}}_{i-1},\qquad\qquad \forall i=1,...,N. $$
+$$ \mathbf{q}_i = \mathbf{q}_{i-1} + \Delta t\ \dot{\mathbf{q}}_{i-1},\qquad\qquad \forall i=1,...,N. $$
 
 To find the solution at all times $t_i$ for $i=1,...,N$, we need the following **inputs**:
 - the initial conditions at $t_0$, $\mathbf{q}_0$
@@ -100,4 +100,9 @@ savefig("./__site/assets/lecture_notes/Module1/ODESolver/figures/displacement_ve
 @@
 * How to define and implement the Forward Euler scheme to solve second order ODEs
 @@
+
+
+# Additional material
+
+The implementation shown above is intended to be understandable for educational purposes, but it is not the most computationally efficient approach. To solve ODEs in Julia, without having to develop your own solver, you can use the [`DiferentialEquations.jl`](https://diffeq.sciml.ai/stable/tutorials/ode_example/) package.
 

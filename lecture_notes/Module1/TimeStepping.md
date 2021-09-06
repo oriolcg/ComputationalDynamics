@@ -25,3 +25,13 @@ The remaining issue with conditions \eqref{eq:dt_var} or \eqref{eq:st_var_compon
 $$\ddot{\mathbf{q}}_i\approx\frac{\dot{\mathbf{q}}_i-\dot{\mathbf{q}}_{i-1}}{\Delta t_{i}}.\label{eq:ddotq}$$
 
 However, this introduces a nonlinearity with respect to $\Delta t_i$ that would have to be addressed with an iterative algorithm. Assuming that the solution is smooth and varies slowly, one could use the previous time step size, $\Delta t_{i-1}$ in \eqref{eq:ddotq}.
+
+&nbsp;
+&nbsp;
+
+@@important 
+@@important-title
+*Now we know...*
+@@
+* How to define a variable time step such that the numerical error is controled.
+@@
