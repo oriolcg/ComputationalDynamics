@@ -1,0 +1,1 @@
+simplify(expand_derivatives(EoM)) = 0.5m*(2(r₁^2)*(cos(ϕ(t))^2)*Differential(t)(Differential(t)(ϕ(t))) + 2(r₁^2)*(sin(ϕ(t))^2)*Differential(t)(Differential(t)(ϕ(t)))) + 0.25k*(r₁*(2p₁ + 2r₁*sin(ϕ(t)) - 2p₃)*cos(ϕ(t)) - r₁*(2p₁ + 2r₁*cos(ϕ(t)) - 2p₃)*sin(ϕ(t)))*(sqrt(abs2(p₁ + r₁*cos(ϕ(t)) - p₃) + abs2(p₁ + r₁*sin(ϕ(t)) - p₃))^-1) ~ 0

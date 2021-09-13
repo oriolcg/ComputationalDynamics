@@ -1,4 +1,4 @@
-@def title = "Module 2. Introduction to structural models and Lagrangian mechanics"
+@def title = "2.1. Structural elements"
 @def hascode = true
 @def mintoclevel=1
 @def maxtoclevel=1

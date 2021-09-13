@@ -1,0 +1,2 @@
+p₂ = Symbolics.Num[p₁ + r₁*cos(ϕ(t)); p₁ + r₁*sin(ϕ(t))]
+p₂ₜ = Symbolics.Num[Differential(t)(p₁ + r₁*cos(ϕ(t))); Differential(t)(p₁ + r₁*sin(ϕ(t)))]

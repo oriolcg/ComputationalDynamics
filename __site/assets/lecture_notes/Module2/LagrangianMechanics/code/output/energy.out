@@ -1,0 +1,2 @@
+T = 0.5m*(sqrt(abs2(Differential(t)(p₁ + r₁*cos(ϕ(t)))) + abs2(Differential(t)(p₁ + r₁*sin(ϕ(t)))))^2)
+V = 0.5k*(r₁ + sqrt(abs2(p₁ + r₁*cos(ϕ(t)) - p₃) + abs2(p₁ + r₁*sin(ϕ(t)) - p₃)) - abs(p₁ - p₃))
